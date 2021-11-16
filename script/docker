@@ -1,0 +1,24 @@
+#!/bin/bash
+set -ex
+
+# builds and tags the Docker image.
+DOCKERFILE=${DOCKERFILE:-ops/Dockerfile}
+DOCKERPATH=${DOCKERPATH:-.}
+REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
+
+# pull base image for cache.
+docker pull $(grep -oE 'FROM .+$$' ${DOCKERFILE} | head -n 1 | cut -d ' ' -f 2)
+
+# pull latest for cache.
+set +e
+docker pull ${REGISTRY_URL:?}/${NAME:?}:latest
+set -e
+
+docker build -f ${DOCKERFILE} \
+	--cache-from ${REGISTRY_URL:?}/${NAME:?}:latest \
+	-t ${REGISTRY_URL:?}/${NAME:?}:${COMMITSH:?} \
+	${DOCKERPATH}
+
+docker tag \
+	${REGISTRY_URL:?}/${NAME:?}:${COMMITSH:?} \
+	${REGISTRY_URL:?}/${NAME:?}:latest
