@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 # builds and tags the Docker image.
 DOCKERFILE=${DOCKERFILE:-ops/Dockerfile}

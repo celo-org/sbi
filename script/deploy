@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#apply manifests in /tmp/manifests
+
+ECHO=""
+
+if [ -n "$DRY_RUN" ]; then
+    ECHO="echo"
+fi
+
+find /tmp/manifests -name "*.yaml" -print0 | xargs -n 1 -0 ${ECHO} kubectl apply -n ${NAMESPACE} -f

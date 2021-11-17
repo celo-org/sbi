@@ -26,3 +26,5 @@ ENV PATH="/google-cloud-sdk/bin:${PATH}"
 
 ADD script /script
 
+WORKDIR /github/workspace
+ENTRYPOINT ["/bin/bash", "/script/apply"]

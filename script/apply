@@ -1,15 +1,20 @@
 #!/bin/bash
+set -e
 
-if  [ -n "GCLOUD_CREDENTIALS" ]; then
+if  [ -v "$GCLOUD_CREDENTIALS" ]; then
     echo "GCLOUD_CREDENTIALS not set, this is required to push and deploy successfully"
     exit 1
 fi
 
-#testing
-export DRY_RUN="yes"
 export REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
 
 # github compatibility
 export NAME=$(cut -d "/" -f2 <<< $GITHUB_REPOSITORY)
 export COMMITSH=${COMMITSH:-GITHUB_SHA}
-export RELEASE_NAME="${ENVIRONMENT}-${NAME}"
+export RELEASE_NAME="${NAMESPACE}-${NAME}"
+
+source /script/credentials
+source /script/docker
+source /script/push
+source /script/manifests
+source /script/deploy
