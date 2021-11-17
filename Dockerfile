@@ -15,9 +15,11 @@ RUN curl -LO https://get.helm.sh/${HELM_RELEASE} \
     && rm -rf ${HELM_RELEASE} linux-amd64
 
 ARG GCLOUD_RELEASE=google-cloud-sdk-364.0.0-linux-x86_64.tar.gz
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${GCLOUD_RELEASE} \
-    && tar -xf ${GCLOUD_RELEASE} \
-    && /google-cloud-sdk/install.sh -q --additional-components kubectl kubectl-oidc docker-credential-gcr \
+RUN curl -LO https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${GCLOUD_RELEASE} \
+    && tar -xzf ${GCLOUD_RELEASE} \
+    && /google-cloud-sdk/install.sh -q --additional-components kubectl docker-credential-gcr \
+    && rm -fr /google-cloud-sdk/.install/.backup \
+    && rm -fr /google-cloud-sdk/bin/anthoscli \
     && rm -fr ${GCLOUD_RELEASE}
 
 ENV PATH="/google-cloud-sdk/bin:${PATH}"

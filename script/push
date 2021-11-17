@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+ECHO=""
 
-docker push ${REGISTRY_URL:?}/${NAME:?}:${COMMITSH:?}
-docker push ${REGISTRY_URL:?}/${NAME:?}:latest
+if [ -n "$DRY_RUN" ]; then
+    ECHO="echo"
+fi
+
+${ECHO} docker push ${REGISTRY_URL:?}/${NAME:?}:${COMMITSH:?}
+${ECHO} docker push ${REGISTRY_URL:?}/${NAME:?}:latest
