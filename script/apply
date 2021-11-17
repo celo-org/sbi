@@ -9,7 +9,7 @@ export REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
 
 # github environment var compatibility
 export NAME=$(cut -d "/" -f2 <<< $GITHUB_REPOSITORY)
-export COMMITSH=${COMMITSH:-GITHUB_SHA}
+export COMMITSH=${COMMITSH:-$GITHUB_SHA}
 export RELEASE_NAME="${NAMESPACE}-${NAME}"
 
 source /script/credentials
