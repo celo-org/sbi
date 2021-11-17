@@ -2,4 +2,4 @@ name: 'sbi'
 description: 'Celo simple build image'
 runs:
   using: 'docker'
-  image: 'docker://gcr.io/celo-testnet/sbi:latest'
+  image: 'docker://us.gcr.io/celo-testnet/sbi:latest'
