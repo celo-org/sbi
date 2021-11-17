@@ -8,4 +8,9 @@ if [ -n "$DRY_RUN" ]; then
     ECHO="echo"
 fi
 
+echo "Deploying manifests: "
+
+find /tmp/manifests -name "*.yaml" -print0 | xargs -n 1 -0 cat
+
+#actually apply
 find /tmp/manifests -name "*.yaml" -print0 | xargs -n 1 -0 ${ECHO} kubectl apply -n ${NAMESPACE} -f

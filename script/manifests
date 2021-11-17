@@ -1,21 +1,11 @@
 #!/bin/bash
 set -e
 
-env
-
 CHARTDIR=${CHARTDIR:-ops/helm}
 MANIFESTS_DIR=${MANIFESTS_DIR:-/tmp/manifests}
 
 rm -rf ${MANIFESTS_DIR}
 mkdir -p ${MANIFESTS_DIR}
-
-
-if [[ -f "ops/environment.yaml" ]]; then
-	while IFS= read -r line; do
-		eval "echo \"$line\""
-	done < ops/environment.yaml > /tmp/environment.yaml
-	environment_yaml="--values /tmp/environment.yaml"
-fi
 
 if [[ -f "${CHARTDIR}/values.yaml" ]]; then
 	defaults_args="--values ${CHARTDIR}/values.yaml"
@@ -27,8 +17,6 @@ fi
 
 helm template ${RELEASE_NAME} ${CHARTDIR} \
 	${defaults_args} \
-	${environment_args} \
-	${cluster_args} \
 	--set image.tag="${COMMITSH}" \
 	${namespace_yaml} \
 	--output-dir ${MANIFESTS_DIR}
