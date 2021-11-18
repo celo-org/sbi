@@ -2,6 +2,8 @@
 
 A github action to build and deploy kubernetes based apps to GCR + GKE via helm charts.
 
+* how it works, what it uses, rolling release
+
 # Usage
 
 ## project structure
@@ -16,6 +18,10 @@ A github action to build and deploy kubernetes based apps to GCR + GKE via helm 
 
 * gcloud roles
 
+## notifications
+
+* slack config
+
 # Documentation
 
 ## variables
@@ -25,7 +31,7 @@ A github action to build and deploy kubernetes based apps to GCR + GKE via helm 
 # Development
 
 * how to build and release this
-* when tags need to change
+* when tags need to change (github action)
 
 # Todo
 
