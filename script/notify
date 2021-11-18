@@ -8,26 +8,25 @@ banner "Notifying slack"
 
 if [ -z "$SLACK_API_TOKEN" ] || [ -z "$SLACK_CHANNEL_IDS" ] ; then
     echo "SLACK_API_TOKEN or SLACK_CHANNEL_IDS not set, skipping notification"
-    exit 0
+else
+    #vars to interpolate
+
+    REPO=${GITHUB_REPOSITORY:-something}
+    SHORT_HASH=$(echo $COMMITSH | cut -c1-8)
+    URL="https://github.com/$REPO/commit/$COMMITSH"
+    USER=${GITHUB_ACTOR:-someone}
+
+    MESSAGE="$RELEASE_NAME was built and deployed to $CLUSTER / $NAMESPACE from <$URL|$SHORT_HASH> by $USER"
+
+    # post will fail if bot user is not in a given channel, don't kill the script if that happens
+    set +e
+
+    # post to slack api
+    for channel in $SLACK_CHANNEL_IDS; do
+        BODY="{ \"channel\" : \"$channel\", \"text\" : \"$MESSAGE\", \"as_user\" : true }"
+
+        curl -H "Authorization: Bearer $SLACK_API_TOKEN" -H "Content-Type: application/json" https://slack.com/api/chat.postMessage  -d "$BODY" 
+    done
+
+    set -e
 fi
-
-#vars to interpolate
-
-REPO=${GITHUB_REPOSITORY:-something}
-SHORT_HASH=$(echo $COMMITSH | cut -c1-8)
-URL="https://github.com/$REPO/commit/$COMMITSH"
-USER=${GITHUB_ACTOR:-someone}
-
-MESSAGE="$RELEASE_NAME was built and deployed to $CLUSTER / $NAMESPACE from <$URL|$SHORT_HASH> by $USER"
-
-# post will fail if bot user is not in a given channel, don't kill the script if that happens
-set +e
-
-# post to slack api
-for channel in $SLACK_CHANNEL_IDS; do
-    BODY="{ \"channel\" : \"$channel\", \"text\" : \"$MESSAGE\", \"as_user\" : true }"
-
-    curl -H "Authorization: Bearer $SLACK_API_TOKEN" -H "Content-Type: application/json" https://slack.com/api/chat.postMessage  -d "$BODY" 
-done
-
-set -e
