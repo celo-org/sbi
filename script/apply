@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source ./common
+source /script/common
 
 banner "simple build image"
 
@@ -18,17 +18,17 @@ export NAME=$(cut -d "/" -f2 <<< $GITHUB_REPOSITORY)
 export COMMITSH=${COMMITSH:-$GITHUB_SHA}
 export RELEASE_NAME="${NAMESPACE}-${NAME}"
 
-source ./credentials
+source /script/credentials
 
 # assert build environment variables
 banner "Build Env Variables"
 env
 
-source ./docker
-source ./push
-source ./manifests
-source ./deploy
-source ./notify
+source /script/docker
+source /script/push
+source /script/manifests
+source /script/deploy
+source /script/notify
 
 banner "Cleaning up"
 

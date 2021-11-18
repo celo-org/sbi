@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common
+source /script/common
 banner "Applying kubernetes manifests"
 
 #apply manifests in /tmp/manifests

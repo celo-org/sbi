@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source ./common
+source /script/common
 # builds and tags the Docker image.
 DOCKERFILE=${DOCKERFILE:-ops/Dockerfile}
 DOCKERPATH=${DOCKERPATH:-.}

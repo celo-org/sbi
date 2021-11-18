@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-source ./common
+source /script/common
 banner "Creating kubernetes manifests"
 
 CHARTDIR=${CHARTDIR:-ops/helm}

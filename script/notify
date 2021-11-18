@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./common
+source /script/common
 
 banner "Notifying slack"
 
