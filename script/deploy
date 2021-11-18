@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source ./common
+banner "Applying kubernetes manifests"
+
 #apply manifests in /tmp/manifests
 
 ECHO=""

@@ -1,10 +1,16 @@
 #!/bin/bash
 set -e
 
-if  [ -v "$GCLOUD_CREDENTIALS" ]; then
+source ./common
+
+banner "simple build image"
+
+if  [ -z "$GCLOUD_CREDENTIALS" ]; then
     echo "GCLOUD_CREDENTIALS not set, this is required to push and deploy successfully"
     exit 1
 fi
+
+
 export REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
 
 # github environment var compatibility
@@ -12,15 +18,19 @@ export NAME=$(cut -d "/" -f2 <<< $GITHUB_REPOSITORY)
 export COMMITSH=${COMMITSH:-$GITHUB_SHA}
 export RELEASE_NAME="${NAMESPACE}-${NAME}"
 
-source /script/credentials
+source ./credentials
 
 # assert build environment variables
+banner "Build Env Variables"
 env
 
-source /script/docker
-source /script/push
-source /script/manifests
-source /script/deploy
+source ./docker
+source ./push
+source ./manifests
+source ./deploy
+source ./notify
+
+banner "Cleaning up"
 
 # forcefully remove credentials, container should be destroyed but let's assert these are not persisted
 gcloud auth revoke

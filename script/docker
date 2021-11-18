@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
-
+source ./common
 # builds and tags the Docker image.
 DOCKERFILE=${DOCKERFILE:-ops/Dockerfile}
 DOCKERPATH=${DOCKERPATH:-.}
 REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
+
+banner "Docker build"
 
 # pull base image for cache.
 docker pull $(grep -oE 'FROM .+$$' ${DOCKERFILE} | head -n 1 | cut -d ' ' -f 2)

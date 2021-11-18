@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+source ./common
+banner "Creating kubernetes manifests"
+
 CHARTDIR=${CHARTDIR:-ops/helm}
 MANIFESTS_DIR=${MANIFESTS_DIR:-/tmp/manifests}
 
