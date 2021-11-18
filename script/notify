@@ -24,7 +24,7 @@ else
 
     # post to slack api
     for channel in $SLACK_CHANNEL_IDS; do
-        BODY="{ \"channel\" : \"$channel\", \"text\" : \"$MESSAGE\", \"as_user\" : true }"
+        BODY="{ \"channel\" : \"$channel\", \"text\" : \"$MESSAGE\", \"as_user\" : true, \"unfurl_links\":false }"
 
         curl -H "Authorization: Bearer $SLACK_API_TOKEN" -H "Content-Type: application/json" https://slack.com/api/chat.postMessage  -d "$BODY" 
     done
