@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#if token and rooms are set
+
+#vars to interpolate
+
+REPO=${GITHUB_REPOSITORY:-something}
+SHORT_HASH=$(echo $COMMITSH | cut -c1-8)
+URL="https://github.com/$REPO/commit/$COMMITSH"
+
+MESSAGE="$RELEASE_NAME was built and deployed to $CLUSTER / $NAMESPACE from <$URL|$SHORT_HASH>"
+
+for channel in $SLACK_CHANNEL_IDS; do
+    BODY="{ \"channel\" : \"$channel\", \"text\" : \"$MESSAGE\" }"
+
+    curl -H "Authorization: Bearer $SLACK_API_TOKEN" -H "Content-Type: application/json" https://slack.com/api/chat.postMessage  -d "$BODY" 
+done
