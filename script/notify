@@ -15,8 +15,9 @@ else
     SHORT_HASH=$(echo $COMMITSH | cut -c1-8)
     URL="https://github.com/$REPO/commit/$COMMITSH"
     USER=${GITHUB_ACTOR:-someone}
+    USER_URL="https://github.com/$USER"
 
-    MESSAGE="$RELEASE_NAME was built and deployed to $CLUSTER / $NAMESPACE from <$URL|$SHORT_HASH> by $USER"
+    MESSAGE="$RELEASE_NAME was built and deployed to $CLUSTER / $NAMESPACE from <$URL|$SHORT_HASH> by <$USER_URL|$USER>"
 
     # post will fail if bot user is not in a given channel, don't kill the script if that happens
     set +e
