@@ -36,3 +36,6 @@ banner "Cleaning up"
 gcloud auth revoke
 rm ~/.config/gcloud/access_tokens.db
 rm ~/.config/gcloud/credentials.db
+
+# remove generated manifests
+rm -fr /tmp/*
