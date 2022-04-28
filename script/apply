@@ -5,11 +5,17 @@ source /script/common
 
 banner "simple build image"
 
-if  [ -z "$GCLOUD_CREDENTIALS" ]; then
-    echo "GCLOUD_CREDENTIALS not set, this is required to push and deploy successfully"
-    exit 1
-fi
+function assert_var_presence {
+    var=$1
+    if  [ -z "${!var}" ]; then
+        echo "$var not set, this is required to push and deploy successfully"
+        exit 1
+    fi
+}
 
+for var in GCLOUD_CREDENTIALS NAMESPACE CLUSTER; do
+    assert_var_presence $var
+done
 
 export REGISTRY_URL=${REGISTRY_URL:-gcr.io/celo-testnet}
 
