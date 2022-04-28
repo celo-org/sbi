@@ -80,20 +80,20 @@ These should be provided via `SLACK_API_TOKEN` and `SLACK_CHANNEL_IDS` environme
 
 ## Variables
 
-| Required | Var Name             | Description                                                    | Default Value                                                                         |   |   |
-|----------|----------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------|---|---|
-|          | `NAME`               | The name of the app, used in helm's release name               | The name of the repository on Github - provided at build time via `GITHUB_REPOSITORY` |   |   |
-|          | `COMMITSH`           | The version of the app to build and deploy                     | The value of the current HEAD on Github - provided via `GITHUB_SHA`                   |   |   |
-| ❗️        | `GCLOUD_CREDENTIALS` | The json credentials for the service account                   | None                                                                                  |   |   |
-|          | `RELEASE_NAME`       | The release name for helm                                      | "`NAMESPACE`-`NAME`"                                                                  |   |   |
-|          | `DOCKERFILE`         | The path to the Dockerfile that builds the container to deploy | `PROJECT_ROOT/ops/Dockerfile`                                                         |   |   |
-|          | `DOCKERPATH`         | The path to the docker build context                           | `PROJECT_ROOT`                                                                        |   |   |
-|          | `REGISTRY_URL`       | The url of the docker registry you wish to push to.            | `gcr.io/celo-testnet`                                                                 |   |   |
-|          | `CHART_DIR`          | The path to the helm chart.                                    | `PROJECT_ROOT/ops/helm`                                                               |   |   |
-|          | `MANIFESTS_DIR`      | The tmp path to the manifests to generate                      | `/tmp/manifests`                                                                      |   |   |
-|          | `PROJECT`            | The GCP project of your credentials.                           |                                                                                       |   |   |
-|          | `ZONE`               | The availability zone of your credentials                      |                                                                                       |   |   |
-| ❗️        | `CLUSTER`            | The k8s cluster you are deploying to.                          |                                                                                       |   |   |
+| Required | Var Name             | Description                                                    | Default Value                                                                         |
+|----------|----------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------|
+|          | `NAME`               | The name of the app, used in helm's release name               | The name of the repository on Github - provided at build time via `GITHUB_REPOSITORY` |
+|          | `COMMITSH`           | The version of the app to build and deploy                     | The value of the current HEAD on Github - provided via `GITHUB_SHA`                   |
+| ❗️        | `GCLOUD_CREDENTIALS` | The json credentials for the service account                   | None                                                                                 |
+|          | `RELEASE_NAME`       | The release name for helm                                      | "`NAMESPACE`-`NAME`"                                                                  |
+|          | `DOCKERFILE`         | The path to the Dockerfile that builds the container to deploy | `PROJECT_ROOT/ops/Dockerfile`                                                         |
+|          | `DOCKERPATH`         | The path to the docker build context                           | `PROJECT_ROOT`                                                                        |
+|          | `REGISTRY_URL`       | The url of the docker registry you wish to push to.            | `gcr.io/celo-testnet`                                                                 |
+|          | `CHART_DIR`          | The path to the helm chart.                                    | `PROJECT_ROOT/ops/helm`                                                               |
+|          | `MANIFESTS_DIR`      | The tmp path to the manifests to generate                      | `/tmp/manifests`                                                                      |
+|          | `PROJECT`            | The GCP project of your credentials.                           |                                                                                       |
+|          | `ZONE`               | The availability zone of your credentials                      |                                                                                       |
+| ❗️        | `CLUSTER`            | The k8s cluster you are deploying to.                          |                                                                                      |
 | ❗️        | `NAMESPACE`          | The k8s namespace to deploy to.                                |     
 
 
