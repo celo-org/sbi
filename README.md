@@ -1,6 +1,6 @@
 # simple build image
 
-![image](https://user-images.githubusercontent.com/85586/165821692-f6692cc2-49f9-4fca-9b57-4797ebbb14d7.png)
+![image](https://user-images.githubusercontent.com/85586/165821692-f6692cc2-49f9-4fca-9b57-4797ebbb14d7.png =195x300)
 
 
 A github action to build and deploy clabs kubernetes based apps to GCR + GKE via helm charts.
