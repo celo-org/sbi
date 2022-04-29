@@ -65,6 +65,10 @@ You need a service account with the following roles applied
 - `roles/storage.admin`
   - To create and push new images
   - <https://cloud.google.com/container-registry/docs/access-control#grant>
+> OR
+- `projects/celo-testnet/roles/CustomRole112`
+  - "SBI Container Registry Access"
+  - Less unnecessary permissions than `storage.admin`
 - `roles/container.developer`
   - To interact with the k8s cluster and effect manifest changes
 
